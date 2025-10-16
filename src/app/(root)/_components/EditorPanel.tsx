@@ -10,11 +10,11 @@ import { useClerk } from '@clerk/nextjs';
 import { EditorPanelSkeleton } from './EditorPanelSkeleton';
 import useMounted from '@/hooks/useMounted';
 import ShareSnippetDialog from './ShareSnippetDialog';
-import { useRouter } from 'next/navigation'; // ✅ Needed for redirect
+import { useRouter } from 'next/navigation';
 
 function EditorPanel() {
   const clerk = useClerk();
-  const router = useRouter(); // ✅ Initialize router
+  const router = useRouter();
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
 
   const {
@@ -77,7 +77,7 @@ function EditorPanel() {
               <h2 className="text-sm hidden lg:block font-medium text-white">
                 Code Editor
               </h2>
-              <p className=" hidden lg:block text-xs text-gray-500">
+              <p className="hidden lg:block text-xs text-gray-500">
                 Write and execute your code
               </p>
             </div>
@@ -189,8 +189,8 @@ function EditorPanel() {
         <ShareSnippetDialog
           onClose={() => setIsShareDialogOpen(false)}
           onSuccess={() => {
-            setIsShareDialogOpen(false); // Close dialog
-            router.push('/snippets'); // ✅ Redirect to /snippets
+            setIsShareDialogOpen(false);
+            router.push('/snippets');
           }}
         />
       )}

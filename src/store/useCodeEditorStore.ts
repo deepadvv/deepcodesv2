@@ -1,9 +1,9 @@
-// useCodeEditorStore.ts (just as you have it)
+// useCodeEditorStore.ts
 
 import { CodeEditorState } from './../types/index';
 import { LANGUAGE_CONFIG } from '@/app/(root)/_constants';
 import { create } from 'zustand';
-import { Monaco } from '@monaco-editor/react';
+import type * as monacoEditor from 'monaco-editor'; // ✅ Correct import
 
 const getInitialState = () => {
   if (typeof window === 'undefined') {
@@ -48,7 +48,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
 
     getCode: () => get().editor?.getValue() || '',
 
-    setEditor: (editor: Monaco) => {
+    setEditor: (editor: monacoEditor.editor.IStandaloneCodeEditor) => { // ✅ Corrected type
       const savedCode = localStorage.getItem(`editor-code-${get().language}`);
       if (savedCode) editor.setValue(savedCode);
       set({ editor });
@@ -101,7 +101,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
             language: runtime.language,
             version: runtime.version,
             files: [{ content: code }],
-            stdin: input, // <-- here is the key addition
+            stdin: input,
           }),
         });
 
