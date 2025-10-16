@@ -30,7 +30,6 @@ export const LANGUAGE_CONFIG: LanguageConfig = {
     monacoLanguage: 'javascript',
     defaultCode: `console.log("Hello, World!");`,
   },
-
   python: {
     id: 'python',
     label: 'Python',
@@ -115,7 +114,6 @@ func main() {
     println!("Hello, World!");
 }`,
   },
-
   ruby: {
     id: 'ruby',
     label: 'Ruby',
@@ -217,11 +215,11 @@ export const THEME_DEFINITONS = {
   },
 };
 
-// Helper function to define themes in Monaco
+// ✅ Fixed defineMonacoThemes
 export const defineMonacoThemes = (monaco: Monaco) => {
   Object.entries(THEME_DEFINITONS).forEach(([themeName, themeData]) => {
     monaco.editor.defineTheme(themeName, {
-      base: themeData.base as monaco.editor.BuiltinTheme,  // <-- cast here
+      base: themeData.base as Monaco['editor']['BuiltinTheme'],
       inherit: themeData.inherit,
       rules: themeData.rules.map((rule) => ({
         ...rule,
